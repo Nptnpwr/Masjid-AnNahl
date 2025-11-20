@@ -69,6 +69,50 @@
     </div>
 </section>
 
+{{-- STRUKTUR PENGURUS --}}
+<section class="section-padding py-5 bg-white">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5">Struktur Pengurus Masjid</h2>
+
+        <div class="row justify-content-center">
+            @if($pengurus && count($pengurus) > 0)
+                @foreach ($pengurus as $pengurusItem)
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card card-custom h-100 text-center p-3">
+                        {{-- Foto --}}
+                        <div class="mb-3 mx-auto">
+                            <img src="{{ $pengurusItem->foto ? asset('storage/' . $pengurusItem->foto) : 'https://placehold.co/150x150?text=No+Foto' }}" 
+                                 class="rounded-circle" 
+                                 width="120" height="120" 
+                                 style="object-fit: cover;"
+                                 alt="{{ $pengurusItem->nama }}">
+                        </div>
+                        
+                        {{-- Nama & Jabatan --}}
+                        <h5 class="fw-bold mb-1">{{ $pengurusItem->nama }}</h5>
+                        <p class="text-primary mb-2">{{ $pengurusItem->jabatan }}</p>
+                        
+                        {{-- Kontak --}}
+                        @if($pengurusItem->kontak)
+                        <p class="text-muted small">
+                            <i class="bi bi-telephone"></i> {{ $pengurusItem->kontak }}
+                        </p>
+                        @endif
+                    </div>
+                </div>
+                @endforeach
+            @else
+                <div class="col-12 text-center">
+                    <p class="text-muted">Struktur pengurus belum tersedia.</p>
+                    <a href="{{ route('admin.pengurus.create') }}" class="btn btn-primary-custom mt-2">
+                        Tambah Pengurus
+                    </a>
+                </div>
+            @endif
+        </div>
+    </div>
+</section>
+
 {{-- FASILITAS --}}
 <section class="section-padding py-5 bg-light">
     <div class="container">

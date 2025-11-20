@@ -48,10 +48,13 @@
         <h4 class="text-center mb-4">Admin Panel</h4>
         
         <a href="{{ route('admin.dashboard') }}">Dashboard</a>
+        <a href="{{ route('admin.profile.edit') }}">Profil Masjid</a>
         <a href="{{ route('admin.pengurus.index') }}">Data Pengurus</a>
-        <a href="{{ route('admin.kegiatan.index') }}">Kegiatan</a>
-        <a href="{{ route('admin.berita.index') }}">Berita</a>
-        <a href="{{ route('admin.galeri.index') }}">Galeri</a>
+        <a href="{{ route('admin.activities.index') }}">Kegiatan</a>
+        <a href="{{ route('admin.news.index') }}">Berita</a>
+        <a href="{{ route('admin.galleries.index') }}">Galeri</a>
+        <a href="{{ route('admin.donations.index') }}">Donasi</a>
+        <a href="{{ route('admin.prayers.index') }}">Jadwal Sholat</a>
         <a href="{{ route('admin.logout') }}">Logout</a>
     </div>
 

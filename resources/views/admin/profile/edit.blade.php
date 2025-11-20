@@ -26,29 +26,29 @@
                 <img src="{{ asset('storage/' . $profile->about_image) }}" class="img-fluid mb-3" width="200">
             @endif
 
-            <textarea name="about_text_1" class="form-control mb-3" rows="4">{{ $profile->about_text_1 }}</textarea>
-            <textarea name="about_text_2" class="form-control" rows="4">{{ $profile->about_text_2 }}</textarea>
+            <textarea name="about_text_1" class="form-control mb-3" rows="4">{{ $profile->about_text_1 ?? '' }}</textarea>
+            <textarea name="about_text_2" class="form-control" rows="4">{{ $profile->about_text_2 ?? '' }}</textarea>
         </div>
 
         <div class="card p-4 mb-4">
             <h4>Visi & Misi</h4>
 
-            <textarea name="visi" class="form-control mb-3" rows="3">{{ $profile->visi }}</textarea>
-            <textarea name="misi" class="form-control" rows="3">{{ $profile->misi }}</textarea>
+            <textarea name="visi" class="form-control mb-3" rows="3">{{ $profile->visi ?? '' }}</textarea>
+            <textarea name="misi" class="form-control" rows="3">{{ $profile->misi ?? '' }}</textarea>
         </div>
 
         <div class="card p-4 mb-4">
             <h4>Statistik Masjid</h4>
 
-            <input type="number" name="capacity" class="form-control mb-2" value="{{ $profile->capacity }}">
-            <input type="number" name="year" class="form-control mb-2" value="{{ $profile->year }}">
-            <input type="text" name="routine_activities" class="form-control mb-2" value="{{ $profile->routine_activities }}">
-            <input type="text" name="public_info" class="form-control" value="{{ $profile->public_info }}">
+            <input type="number" name="capacity" class="form-control mb-2" value="{{ $profile->capacity ?? '' }}">
+            <input type="number" name="year" class="form-control mb-2" value="{{ $profile->year ?? '' }}">
+            <input type="text" name="routine_activities" class="form-control mb-2" value="{{ $profile->routine_activities ?? '' }}">
+            <input type="text" name="public_info" class="form-control" value="{{ $profile->public_info ?? '' }}">
         </div>
 
         <div class="card p-4 mb-4">
             <h4>Kontak</h4>
-            <input type="text" name="whatsapp" class="form-control" value="{{ $profile->whatsapp }}">
+            <input type="text" name="whatsapp" class="form-control" value="{{ $profile->whatsapp ?? '' }}">
         </div>
 
         <button class="btn btn-primary w-100">Simpan Perubahan</button>

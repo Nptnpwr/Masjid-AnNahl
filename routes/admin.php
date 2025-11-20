@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\GalleryAdminController;
 use App\Http\Controllers\Admin\DonationAdminController;
 use App\Http\Controllers\Admin\MasjidProfileAdminController;
 use App\Http\Controllers\Admin\PrayerTimeAdminController;
+use App\Http\Controllers\Admin\ScheduleAdminController;
+use App\Http\Controllers\Admin\PengurusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,4 +41,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Profil Masjid
     Route::get('profile/edit', [MasjidProfileAdminController::class, 'edit'])->name('profile.edit');
     Route::post('profile/update', [MasjidProfileAdminController::class, 'update'])->name('profile.update');
+
+    // ✅ PENGURUS - DIPINDAH dari web.php
+    Route::resource('pengurus', PengurusController::class);
+
+    // ✅ SCHEDULES - DIPINDAH dari web.php  
+    Route::resource('schedules', ScheduleAdminController::class)->except(['show']);
 });

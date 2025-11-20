@@ -11,6 +11,11 @@ class MasjidProfileAdminController extends Controller
     public function edit()
     {
         $profile = MasjidProfile::first();
+        
+        if (!$profile) {
+            $profile = new MasjidProfile();
+        }
+
         return view('admin.profile.edit', compact('profile'));
     }
 

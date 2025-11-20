@@ -3,8 +3,6 @@
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrayerTimeController;
-use App\Http\Controllers\Admin\ScheduleAdminController;
-use App\Http\Controllers\Admin\PengurusController;
 use App\Models\PrayerTime;
 
 /*
@@ -24,7 +22,7 @@ Route::get('/galeri', [HomeController::class, 'galeri'])->name('galeri');
 Route::get('/donasi', [HomeController::class, 'donasi'])->name('donasi');
 
 // Jadwal sholat untuk user
-Route::get('/jadwal-sholat', [ScheduleAdminController::class, 'getPrayerTimes'])->name('jadwal.sholat');
+Route::get('/jadwal-sholat', [HomeController::class, 'jadwal'])->name('jadwal.sholat');
 
 Route::get('/jadwal', [PrayerTimeController::class, 'index'])->name('jadwal'); 
 Route::get('/jadwal-dark', [PrayerTimeController::class, 'index'])->name('jadwal.dark');
@@ -36,19 +34,7 @@ require __DIR__.'/auth.php';
 
 /*
 |--------------------------------------------------------------------------
-| Admin Routes
+| Admin Routes - LOAD SEMUA dari admin.php
 |--------------------------------------------------------------------------
 */
-
-// schedule admin
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('schedules', ScheduleAdminController::class)->except(['show']);
-});
-
-// PENGURUS 
-Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function () {
-    Route::resource('pengurus', PengurusController::class);
-});
-
-// Load admin routes tambahan dari admin.php
 require __DIR__.'/admin.php';

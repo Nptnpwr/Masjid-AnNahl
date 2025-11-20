@@ -172,7 +172,16 @@
 
                         <li class="nav-item {{ request()->routeIs('admin.prayers.*') ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('admin.prayers.index') }}">
-                                <i class="bi bi-clock"></i> Jadwal Salat
+                                <i class="bi bi-images me-2"></i>
+                                Jadwal Solat
+                            </a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-white {{ request()->routeIs('admin.profile.*') ? 'active' : '' }}" 
+                            href="{{ route('admin.profile.edit') }}">
+                                <i class="bi bi-building me-2"></i>
+                                Profil Masjid
                             </a>
                         </li>
                         
