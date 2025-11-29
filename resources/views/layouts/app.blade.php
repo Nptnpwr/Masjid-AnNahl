@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Masjid Al Muta\'allimin')</title>
+    <title>@yield('title', 'Masjid An Nahl')</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -172,7 +172,7 @@
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
                 <img src="https://kompaspedia.kompas.id/wp-content/uploads/2021/07/Logo-Universitas-Sultan-Ageng-Tirtayasa_thumb.png" 
                      alt="Logo" width="65" height="40" class="rounded-circle me-2">
-                <span class="fw-bold">Masjid Al Muta'allimin</span>
+                <span class="fw-bold">Masjid An Nahl</span>
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -234,7 +234,7 @@
                     <div class="d-flex align-items-center mb-3">
                         <img src="https://kompaspedia.kompas.id/wp-content/uploads/2021/07/Logo-Universitas-Sultan-Ageng-Tirtayasa_thumb.png" 
                              alt="Logo" width="65" height="40" class="rounded-circle me-2">
-                        <h5 class="text-white mb-0">Masjid Al Muta'allimin</h5>
+                        <h5 class="text-white mb-0">Masjid An Nahl</h5>
                     </div>
                     <p class="mb-3">Jl. Jenderal Sudirman KM 3, Kotabumi, Kec. Purwakarta, Kota Cilegon, Banten, 42435, Indonesia</p>
                 </div>
@@ -268,7 +268,7 @@
             
             <div class="row">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0">&copy; {{ date('Y') }} Masjid Al Muta'allimin. All rights reserved.</p>
+                    <p class="mb-0">&copy; {{ date('Y') }} Masjid An Nahl. All rights reserved.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <a href="#" class="text-decoration-none">
