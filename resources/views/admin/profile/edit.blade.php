@@ -34,7 +34,7 @@
         <div class="card-body p-4">
 
             <!-- Tentang Masjid -->
-            <form action="{{ route('admin.profile.update.tentang') }}" method="POST">
+            <form action="{{ route('admin.profile.update.tentang') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @include('admin.profile.parts.tentang')
                 @include('admin.profile.parts.submit')
@@ -65,6 +65,7 @@
 
             <!-- Divider -->
             <div class="border-top my-5"></div>
+
 
             <!-- Kontak -->
             <form action="{{ route('admin.profile.update.kontak') }}" method="POST">

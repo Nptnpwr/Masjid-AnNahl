@@ -136,7 +136,7 @@
                         <img src="https://kompaspedia.kompas.id/wp-content/uploads/2021/07/Logo-Universitas-Sultan-Ageng-Tirtayasa_thumb.png"
                             alt="Logo" width="75" height="50" class="rounded-circle mb-2">
                         <h6 class="text-white">Admin Panel</h6>
-                        <p class="text-black small mb-0">{{ Auth::user()->name ?? 'Admin' }}</p>
+                        <p class="text-info small mb-0">{{ Auth::user()->name ?? 'Admin' }}</p>
                     </div>
 
                     <ul class="nav flex-column">

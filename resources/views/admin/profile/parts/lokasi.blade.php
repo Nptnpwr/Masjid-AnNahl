@@ -59,9 +59,9 @@
             Google Maps URL
             <span class="text-danger">*</span>
         </label>
-        <input type="url" name="maps_url" id="maps_url" class="form-control" ...>
-        value="{{ old('maps_url', $profile->maps_url ?? '') }}" placeholder="Contoh: https://goo.gl/maps/xxxx"
-        required>
+        <input type="url" name="maps_url" id="maps_url" class="form-control" ...
+            value="{{ old('maps_url', $profile->maps_url ?? '') }}" placeholder="Contoh: https://goo.gl/maps/xxxx"
+            required>
         @error('maps_url')
             <div class="invalid-feedback d-block">{{ $message }}</div>
         @enderror

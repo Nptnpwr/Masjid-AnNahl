@@ -18,6 +18,14 @@
             ];
         @endphp
 
+        @php
+            $facilities = is_string($profile->facilities)
+                ? json_decode($profile->facilities, true)
+                : $profile->facilities;
+
+            $facilities = $facilities ?: []; // fallback empty array
+        @endphp
+
         @foreach($facilities as $index => $facility)
             <div class="facility-item border rounded-3 p-4 mb-3 bg-light">
                 <div class="row g-3">
@@ -64,7 +72,7 @@
                     <div class="col-md-1 d-flex align-items-end">
                         <button type="button"
                             class="btn btn-outline-danger remove-facility w-100 h-100 d-flex align-items-center justify-content-center rounded-3"
-                            {{ $index == 0 ? 'disabled' : '' }}>
+                            data-index="{{ $index }}">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
@@ -77,3 +85,46 @@
         <i class="bi bi-plus-circle me-1"></i> Tambah Fasilitas
     </button>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("facilities-container");
+
+        function refreshDeleteButtons() {
+            const items = container.querySelectorAll(".facility-item");
+
+            items.forEach((item, index) => {
+                const deleteBtn = item.querySelector(".remove-facility");
+
+                if (items.length === 1) {
+                    // Hanya 1 fasilitas tersisa -> disable delete
+                    deleteBtn.disabled = true;
+                    deleteBtn.title = "Tidak dapat menghapus, minimal harus ada satu fasilitas.";
+                } else {
+                    // Jika lebih dari 1 fasilitas -> semua boleh dihapus
+                    deleteBtn.disabled = false;
+                    deleteBtn.title = "";
+                }
+            });
+        }
+
+        // Ketika tombol hapus ditekan
+        container.addEventListener("click", function (e) {
+            if (!e.target.closest(".remove-facility")) return;
+
+            const items = container.querySelectorAll(".facility-item");
+
+            if (items.length === 1) {
+                alert("Minimal harus ada satu fasilitas. Tidak dapat menghapus fasilitas terakhir.");
+                return;
+            }
+
+            if (confirm("Hapus fasilitas ini?")) {
+                e.target.closest(".facility-item").remove();
+                refreshDeleteButtons();
+            }
+        });
+
+        refreshDeleteButtons();
+    });
+</script>
