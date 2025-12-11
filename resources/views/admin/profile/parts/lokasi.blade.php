@@ -52,6 +52,19 @@
             3. Klik "Share" → "Embed a map"<br>
             4. Copy kode iframe dan paste di sini
         </div>
+        
+        {{-- PREVIEW MAPS EMBED --}}
+        @if($profile && $profile->maps_embed)
+        <div class="mt-3">
+            <h6 class="fw-medium mb-2">Preview Peta:</h6>
+            <div class="bg-light rounded-3 p-2 border">
+                <div class="ratio ratio-16x9">
+                    {!! $profile->maps_embed !!}
+                </div>
+                <small class="text-muted d-block mt-2 text-center">Peta akan ditampilkan di halaman publik</small>
+            </div>
+        </div>
+        @endif
     </div>
 
     <div>
@@ -59,7 +72,7 @@
             Google Maps URL
             <span class="text-danger">*</span>
         </label>
-        <input type="url" name="maps_url" id="maps_url" class="form-control" ...
+        <input type="url" name="maps_url" id="maps_url" class="form-control @error('maps_url') is-invalid @enderror"
             value="{{ old('maps_url', $profile->maps_url ?? '') }}" placeholder="Contoh: https://goo.gl/maps/xxxx"
             required>
         @error('maps_url')

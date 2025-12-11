@@ -3,6 +3,6 @@
         <i class="bi bi-x-circle me-1"></i> Batal
     </a>
     <button type="submit" class="btn btn-primary rounded-3 px-4">
-        <i class="bi bi-check-circle me-1"></i>Simpan Perubahan
+        <i class="bi bi-check-circle me-1"></i>Simpan
     </button>
 </div>

@@ -73,7 +73,7 @@ class ProfileController extends Controller
     {
         $data = $request->validate([
             'address' => 'required',
-            'operational_hours' => 'nullable',
+            'operating_hours' => 'nullable',
             'maps_embed' => 'nullable|string',
             'maps_url' => 'nullable|url',
         ]);
@@ -132,6 +132,42 @@ class ProfileController extends Controller
     {
         $profile = Profile::first();
         return view('admin.profile.index', compact('profile'));
+    }
+
+    public function editTentang()
+    {
+        $profile = Profile::first();
+        return view('admin.profile.edit-tentang', compact('profile'));
+    }
+
+    public function editVisiMisi()
+    {
+        $profile = Profile::first();
+        return view('admin.profile.edit-visimisi', compact('profile'));
+    }
+
+    public function editStatistik()
+    {
+        $profile = Profile::first();
+        return view('admin.profile.edit-statistik', compact('profile'));
+    }
+
+    public function editLokasi()
+    {
+        $profile = Profile::first();
+        return view('admin.profile.edit-lokasi', compact('profile'));
+    }
+
+    public function editFasilitas()
+    {
+        $profile = Profile::first();
+        return view('admin.profile.edit-fasilitas', compact('profile'));
+    }
+
+    public function editKontak()
+    {
+        $profile = Profile::first();
+        return view('admin.profile.edit-kontak', compact('profile'));
     }
 
 }

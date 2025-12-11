@@ -43,7 +43,15 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         Route::get('/', [ProfileController::class, 'index'])->name('index');
         Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
 
+        // edit buat masing masing kategori
+        Route::get('/edit/tentang', [ProfileController::class, 'editTentang'])->name('edit.tentang');
+        Route::get('/edit/visimisi', [ProfileController::class, 'editVisiMisi'])->name('edit.visimisi');
+        Route::get('/edit/statistik', [ProfileController::class, 'editStatistik'])->name('edit.statistik');
+        Route::get('/edit/lokasi', [ProfileController::class, 'editLokasi'])->name('edit.lokasi');
+        Route::get('/edit/fasilitas', [ProfileController::class, 'editFasilitas'])->name('edit.fasilitas');
+        Route::get('/edit/kontak', [ProfileController::class, 'editKontak'])->name('edit.kontak');
 
+        // update buat ubah isi masing masing kategori
         Route::post('/update/statistik', [ProfileController::class, 'updateStatistik'])->name('update.statistik');
         Route::post('/update/tentang', [ProfileController::class, 'updateTentang'])->name('update.tentang');
         Route::post('/update/visimisi', [ProfileController::class, 'updateVisiMisi'])->name('update.visimisi');

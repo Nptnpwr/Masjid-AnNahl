@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin Dashboard') - Masjid An Nahl</title>
+    
+    <title>@yield('title', 'Admin Dashboard') - Masjid An Nahl</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -181,7 +183,7 @@
 
                         <li class="nav-item">
                             <a class="nav-link text-white {{ request()->routeIs('admin.profile.*') ? 'active' : '' }}"
-                                href="{{ route('admin.profile.edit') }}">
+                                href="{{ route('admin.profile.index') }}">
                                 <i class="bi bi-building me-2"></i>
                                 Profil Masjid
                             </a>

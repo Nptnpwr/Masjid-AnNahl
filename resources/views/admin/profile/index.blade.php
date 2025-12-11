@@ -5,8 +5,9 @@
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="mb-0">Kelola Profil Masjid</h2>
+    {{-- Tombol edit semua (opsional) --}}
     <a href="{{ route('admin.profile.edit') }}" class="btn btn-primary rounded-3 px-4">
-        <i class="bi bi-pencil-square me-1"></i> Edit Profil
+        <i class="bi bi-pencil-square me-1"></i> Edit Semua
     </a>
 </div>
 
@@ -25,14 +26,22 @@
     <div class="col-lg-8">
         <div class="card shadow-sm border-0">
             <div class="card-header bg-primary text-white border-0">
-                <div class="d-flex align-items-center">
-                    <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
-                        <i class="bi bi-info-circle-fill" style="font-size: 1.2rem;"></i>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
+                            <i class="bi bi-info-circle-fill" style="font-size: 1.2rem;"></i>
+                        </div>
+                        <h5 class="mb-0">Informasi Umum</h5>
                     </div>
-                    <h5 class="mb-0">Informasi Umum</h5>
+                    {{-- TOMBOL MODAL --}}
+                    <button type="button" class="btn btn-sm btn-light rounded-pill px-3" 
+                            data-bs-toggle="modal" data-bs-target="#modalStatistik">
+                        <i class="bi bi-pencil-square me-1"></i> Edit
+                    </button>
                 </div>
             </div>
             <div class="card-body p-4">
+                {{-- Isi card tetap sama seperti sebelumnya --}}
                 @if($profile)
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -71,7 +80,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <!-- <div class="col-12"> INI GA KEPAKE SUMPAH
                             <div class="bg-light rounded-3 p-3">
                                 <small class="text-muted d-block mb-1">WhatsApp</small>
                                 <div class="d-flex align-items-center">
@@ -79,7 +88,7 @@
                                     <h6 class="mb-0">{{ $profile->whatsapp ?? 'Belum diisi' }}</h6>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 @else
                     <div class="text-center py-5">
@@ -99,14 +108,22 @@
         <!-- Tentang Masjid -->
         <div class="card shadow-sm border-0 mt-4">
             <div class="card-header bg-success text-white border-0">
-                <div class="d-flex align-items-center">
-                    <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
-                        <i class="bi bi-building" style="font-size: 1.2rem;"></i>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
+                            <i class="bi bi-building" style="font-size: 1.2rem;"></i>
+                        </div>
+                        <h5 class="mb-0">Tentang Masjid</h5>
                     </div>
-                    <h5 class="mb-0">Tentang Masjid</h5>
+                    {{-- TOMBOL MODAL --}}
+                    <button type="button" class="btn btn-sm btn-light rounded-pill px-3" 
+                            data-bs-toggle="modal" data-bs-target="#modalTentang">
+                        <i class="bi bi-pencil-square me-1"></i> Edit
+                    </button>
                 </div>
             </div>
             <div class="card-body p-4">
+                {{-- Isi card tentang masjid --}}
                 @if($profile && $profile->about_text_1)
                     <div class="mb-4">
                         <small class="text-muted d-block mb-2">Deskripsi Utama</small>
@@ -134,14 +151,22 @@
         <!-- Visi & Misi -->
         <div class="card shadow-sm border-0 mt-4">
             <div class="card-header bg-warning text-dark border-0">
-                <div class="d-flex align-items-center">
-                    <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
-                        <i class="bi bi-bullseye" style="font-size: 1.2rem;"></i>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
+                            <i class="bi bi-bullseye" style="font-size: 1.2rem;"></i>
+                        </div>
+                        <h5 class="mb-0">Visi & Misi</h5>
                     </div>
-                    <h5 class="mb-0">Visi & Misi</h5>
+                    {{-- TOMBOL MODAL --}}
+                    <button type="button" class="btn btn-sm btn-light rounded-pill px-3" 
+                            data-bs-toggle="modal" data-bs-target="#modalVisiMisi">
+                        <i class="bi bi-pencil-square me-1"></i> Edit
+                    </button>
                 </div>
             </div>
             <div class="card-body p-4">
+                {{-- Isi card visi misi --}}
                 @if($profile)
                     <div class="mb-4">
                         <small class="text-muted d-block mb-2">Visi</small>
@@ -171,11 +196,17 @@
         <!-- Lokasi & Maps -->
         <div class="card shadow-sm border-0 mt-4">
             <div class="card-header bg-danger text-white border-0">
-                <div class="d-flex align-items-center">
-                    <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
-                        <i class="bi bi-geo-alt-fill" style="font-size: 1.2rem;"></i>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
+                            <i class="bi bi-geo-alt-fill" style="font-size: 1.2rem;"></i>
+                        </div>
+                        <h5 class="mb-0">Lokasi & Maps</h5>
                     </div>
-                    <h5 class="mb-0">Lokasi & Maps</h5>
+                    <button type="button" class="btn btn-sm btn-light rounded-pill px-3" 
+                            data-bs-toggle="modal" data-bs-target="#modalLokasi">
+                        <i class="bi bi-pencil-square me-1"></i> Edit
+                    </button>
                 </div>
             </div>
             <div class="card-body p-4">
@@ -198,21 +229,45 @@
                             </div>
                         </div>
                     </div>
-                    <div>
+                    
+                    {{-- TAMBAH BAGIAN INI UNTUK MAPS EMBED --}}
+                    @if($profile->maps_embed)
+                    <div class="mb-4">
+                        <small class="text-muted d-block mb-2">Peta Lokasi</small>
+                        <div class="bg-light rounded-3 p-3">
+                            <div class="ratio ratio-16x9">
+                                {!! $profile->maps_embed !!}
+                            </div>
+                            <div class="text-center mt-2">
+                                <small class="text-muted">Peta interaktif lokasi masjid</small>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
+                    
+                    @if($profile->maps_url)
+                    <div class="mb-4">
                         <small class="text-muted d-block mb-2">Google Maps URL</small>
                         <div class="bg-light rounded-3 p-3">
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-link-45deg text-danger me-2"></i>
-                                @if($profile->maps_url)
-                                    <a href="{{ $profile->maps_url }}" target="_blank" class="text-decoration-none">
-                                        {{ Str::limit($profile->maps_url, 50) }}
+                                <div class="flex-grow-1 text-truncate"> {{-- ← TEXT-TRUNCATE --}}
+                                    <a href="{{ $profile->maps_url }}" target="_blank" 
+                                    class="text-decoration-none" 
+                                    title="{{ $profile->maps_url }}">
+                                        {{ Str::limit($profile->maps_url, 40) }} {{-- ← LIMIT CHARACTER --}}
                                     </a>
-                                @else
-                                    <span class="text-muted">Belum diisi</span>
-                                @endif
+                                </div>
+                                {{-- Tombol copy (optional) --}}
+                                <button class="btn btn-sm btn-outline-secondary ms-2" 
+                                        onclick="copyToClipboard('{{ $profile->maps_url }}')"
+                                        title="Copy link">
+                                    <i class="bi bi-copy"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
+                    @endif
                 @else
                     <div class="text-center py-4">
                         <i class="bi bi-geo-alt text-muted" style="font-size: 2rem;"></i>
@@ -228,11 +283,17 @@
         <!-- Gambar Masjid -->
         <div class="card shadow-sm border-0">
             <div class="card-header bg-info text-white border-0">
-                <div class="d-flex align-items-center">
-                    <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
-                        <i class="bi bi-image" style="font-size: 1.2rem;"></i>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
+                            <i class="bi bi-image" style="font-size: 1.2rem;"></i>
+                        </div>
+                        <h5 class="mb-0">Gambar Masjid</h5>
                     </div>
-                    <h5 class="mb-0">Gambar Masjid</h5>
+                    <button type="button" class="btn btn-sm btn-light rounded-pill px-3" 
+                            data-bs-toggle="modal" data-bs-target="#modalTentang">
+                        <i class="bi bi-pencil-square me-1"></i> Edit
+                    </button>
                 </div>
             </div>
             <div class="card-body p-4 text-center">
@@ -259,27 +320,48 @@
         <!-- Fasilitas -->
         <div class="card shadow-sm border-0 mt-4">
             <div class="card-header bg-purple text-white border-0">
-                <div class="d-flex align-items-center">
-                    <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
-                        <i class="bi bi-list-check" style="font-size: 1.2rem;"></i>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
+                            <i class="bi bi-list-check" style="font-size: 1.2rem;"></i>
+                        </div>
+                        <h5 class="mb-0">Fasilitas</h5>
                     </div>
-                    <h5 class="mb-0">Fasilitas</h5>
+                    {{-- TOMBOL MODAL --}}
+                    <button type="button" class="btn btn-sm btn-light rounded-pill px-3" 
+                            data-bs-toggle="modal" data-bs-target="#modalFasilitas">
+                        <i class="bi bi-pencil-square me-1"></i> Edit
+                    </button>
                 </div>
             </div>
             <div class="card-body p-4">
-                @if($profile && $profile->facilities)
+                {{-- Isi card fasilitas --}}
+                @php
+                    $facilitiesArray = [];
+                    
+                    if ($profile && $profile->facilities) {
+                        if (is_string($profile->facilities)) {
+                            $facilitiesArray = json_decode($profile->facilities, true) ?? [];
+                        } else {
+                            $facilitiesArray = (array) $profile->facilities;
+                        }
+                    }
+                @endphp
+                
+                @if(!empty($facilitiesArray))
                     <div class="row g-3">
-                        @foreach($profile->facilities as $facility)
+                        @foreach($facilitiesArray as $facility)
                             <div class="col-12">
                                 <div class="bg-light rounded-3 p-3">
                                     <div class="d-flex align-items-start">
-                                        <!-- Icon dari data yang dipilih -->
                                         <div class="bg-purple bg-opacity-10 p-2 rounded-circle me-3">
                                             <i class="{{ $facility['icon'] ?? 'bi-building' }} text-purple" style="font-size: 1.2rem;"></i>
                                         </div>
                                         <div>
-                                            <h6 class="mb-1">{{ $facility['name'] }}</h6>
-                                            <small class="text-muted">{{ $facility['description'] }}</small>
+                                            <h6 class="mb-1">{{ $facility['name'] ?? 'Fasilitas' }}</h6>
+                                            @if(!empty($facility['description']))
+                                                <small class="text-muted">{{ $facility['description'] }}</small>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -297,18 +379,200 @@
             </div>
         </div>
 
-        <!-- Action Card -->
+        <!-- Kontak -->
         <div class="card shadow-sm border-0 mt-4">
-            <div class="card-body p-4 text-center">
-                <div class="bg-primary bg-opacity-10 rounded-3 p-4 mb-4">
-                    <i class="bi bi-building text-primary" style="font-size: 2.5rem;"></i>
+            <div class="card-header bg-secondary text-white border-0">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-white bg-opacity-25 p-2 rounded-circle me-3">
+                            <i class="bi bi-telephone" style="font-size: 1.2rem;"></i>
+                        </div>
+                        <h5 class="mb-0">Kontak</h5>
+                    </div>
+                    {{-- TOMBOL MODAL --}}
+                    <button type="button" class="btn btn-sm btn-light rounded-pill px-3" 
+                            data-bs-toggle="modal" data-bs-target="#modalKontak">
+                        <i class="bi bi-pencil-square me-1"></i> Edit
+                    </button>
                 </div>
-                <h5>Perbarui Profil Masjid</h5>
-                <p class="text-muted mb-4">Kelola semua informasi profil masjid dengan mudah</p>
-                <a href="{{ route('admin.profile.edit') }}" class="btn btn-primary rounded-3 px-4">
-                    <i class="bi bi-pencil-square me-1"></i> Edit Profil
-                </a>
             </div>
+            <div class="card-body p-4">
+                {{-- Isi card kontak --}}
+                @if($profile && $profile->whatsapp)
+                    <div class="text-center">
+                        <div class="bg-light rounded-3 p-4">
+                            <i class="bi bi-whatsapp text-success" style="font-size: 2rem;"></i>
+                            <h6 class="mt-3">{{ $profile->whatsapp }}</h6>
+                            <small class="text-muted">Nomor WhatsApp</small>
+                        </div>
+                    </div>
+                @else
+                    <div class="text-center py-4">
+                        <i class="bi bi-telephone text-muted" style="font-size: 2rem;"></i>
+                        <p class="text-muted mt-2 mb-0">Kontak belum diisi</p>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================= -->
+<!-- MODAL-MODAL UNTUK EDIT -->
+<!-- ============================= -->
+
+<!-- Modal: Statistik/Informasi Umum -->
+<div class="modal fade" id="modalStatistik" tabindex="-1" aria-labelledby="modalStatistikLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="modalStatistikLabel">
+                    <i class="bi bi-info-circle-fill me-2"></i> Informasi Umum
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ route('admin.profile.update.statistik') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    @include('admin.profile.parts.statistik')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle me-1"></i> Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Tentang Masjid -->
+<div class="modal fade" id="modalTentang" tabindex="-1" aria-labelledby="modalTentangLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="modalTentangLabel">
+                    <i class="bi bi-building me-2"></i> Tentang Masjid
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ route('admin.profile.update.tentang') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    @include('admin.profile.parts.tentang')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-check-circle me-1"></i> Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Visi & Misi -->
+<div class="modal fade" id="modalVisiMisi" tabindex="-1" aria-labelledby="modalVisiMisiLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title" id="modalVisiMisiLabel">
+                    <i class="bi bi-bullseye me-2"></i> Edit Visi & Misi
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ route('admin.profile.update.visimisi') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    @include('admin.profile.parts.visimisi')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-warning">
+                        <i class="bi bi-check-circle me-1"></i> Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Lokasi -->
+<div class="modal fade" id="modalLokasi" tabindex="-1" aria-labelledby="modalLokasiLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="modalLokasiLabel">
+                    <i class="bi bi-geo-alt-fill me-2"></i> Edit Lokasi & Maps
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ route('admin.profile.update.lokasi') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    @include('admin.profile.parts.lokasi')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-check-circle me-1"></i> Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Fasilitas -->
+<div class="modal fade" id="modalFasilitas" tabindex="-1" aria-labelledby="modalFasilitasLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-purple text-white">
+                <h5 class="modal-title" id="modalFasilitasLabel">
+                    <i class="bi bi-list-check me-2"></i> Edit Fasilitas
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ route('admin.profile.update.fasilitas') }}" method="POST" id="modalFacilitiesForm">
+                @csrf
+                <div class="modal-body">
+                    @include('admin.profile.parts.fasilitas')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-purple text-white">
+                        <i class="bi bi-check-circle me-1"></i> Simpan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Kontak -->
+<div class="modal fade" id="modalKontak" tabindex="-1" aria-labelledby="modalKontakLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-secondary text-white">
+                <h5 class="modal-title" id="modalKontakLabel">
+                    <i class="bi bi-telephone me-2"></i> Edit Kontak
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="{{ route('admin.profile.update.kontak') }}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    @include('admin.profile.parts.kontak')
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-dark">
+                        <i class="bi bi-check-circle me-1"></i> Simpan
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -324,6 +588,17 @@
 
 .text-purple {
     color: var(--purple) !important;
+}
+
+.btn-purple {
+    background-color: var(--purple) !important;
+    border-color: var(--purple) !important;
+    color: white !important;
+}
+
+.btn-purple:hover {
+    background-color: #5a32a3 !important;
+    border-color: #5a32a3 !important;
 }
 
 .card {
@@ -355,6 +630,26 @@
     transition: all 0.3s ease;
 }
 
+/* Modal styles */
+.modal-content {
+    border-radius: 0.75rem;
+    border: none;
+}
+
+.modal-header {
+    border-radius: 0.75rem 0.75rem 0 0;
+    padding: 1.25rem 1.5rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #dee2e6;
+}
+
 /* Tambahan untuk icon fasilitas */
 .bg-purple.bg-opacity-10 {
     background-color: rgba(111, 66, 193, 0.1) !important;
@@ -365,4 +660,69 @@
     justify-content: center;
 }
 </style>
+
+@push('scripts')
+<script>
+// Clean up untuk modal fasilitas
+document.addEventListener('DOMContentLoaded', function() {
+    const modalFasilitas = document.getElementById('modalFasilitas');
+    
+    if (modalFasilitas) {
+        // Reset ketika modal ditutup
+        modalFasilitas.addEventListener('hidden.bs.modal', function() {
+            // Force reset global flag
+            if (typeof facilitiesInitialized !== 'undefined') {
+                facilitiesInitialized = false;
+            }
+        });
+        
+        // Clean initialization ketika modal dibuka
+        modalFasilitas.addEventListener('shown.bs.modal', function() {
+            // Hapus event listener lama jika ada
+            const oldAddBtn = document.getElementById('add-facility');
+            if (oldAddBtn && oldAddBtn._hasListener) {
+                oldAddBtn.removeEventListener('click', oldAddBtn._clickHandler);
+            }
+            
+            // Beri waktu untuk DOM update
+            setTimeout(() => {
+                if (typeof initFacilities === 'function') {
+                    initFacilities();
+                }
+            }, 300);
+        });
+    }
+    
+    // Auto close modal setelah submit
+    document.querySelectorAll('.modal form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            // Validasi khusus untuk form fasilitas
+            if (this.action.includes('fasilitas')) {
+                const facilityNames = this.querySelectorAll('input[name="facility_name[]"]');
+                let isValid = true;
+                
+                facilityNames.forEach(input => {
+                    if (!input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('is-invalid');
+                    }
+                });
+                
+                if (!isValid) {
+                    e.preventDefault();
+                    alert('Semua nama fasilitas harus diisi!');
+                    return;
+                }
+            }
+            
+            // Auto close setelah 1 detik
+            setTimeout(() => {
+                const modal = bootstrap.Modal.getInstance(this.closest('.modal'));
+                if (modal) modal.hide();
+            }, 1000);
+        });
+    });
+});
+</script>
+@endpush
 @endsection
