@@ -5,10 +5,10 @@ use App\Http\Controllers\Admin\ActivityAdminController;
 use App\Http\Controllers\Admin\NewsAdminController;
 use App\Http\Controllers\Admin\GalleryAdminController;
 use App\Http\Controllers\Admin\DonationAdminController;
-use App\Http\Controllers\Admin\MasjidProfileAdminController;
 use App\Http\Controllers\Admin\PrayerTimeAdminController;
 use App\Http\Controllers\Admin\ScheduleAdminController;
 use App\Http\Controllers\Admin\PengurusController;
+use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,19 +18,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    
+
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     // Activities
     Route::resource('activities', ActivityAdminController::class);
-    
+
     // News
     Route::resource('news', NewsAdminController::class);
-    
+
     // Gallery
     Route::resource('galleries', GalleryAdminController::class);
-    
+
     // Donation
     Route::resource('donations', DonationAdminController::class);
 
@@ -39,9 +39,21 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('prayers', PrayerTimeAdminController::class);
 
     // Profil Masjid
-    Route::get('profile', [MasjidProfileAdminController::class, 'index'])->name('profile.index');
-    Route::get('profile/edit', [MasjidProfileAdminController::class, 'edit'])->name('profile.edit');
-    Route::post('profile/update', [MasjidProfileAdminController::class, 'update'])->name('profile.update');
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
+
+
+        Route::post('/update/statistik', [ProfileController::class, 'updateStatistik'])->name('update.statistik');
+        Route::post('/update/tentang', [ProfileController::class, 'updateTentang'])->name('update.tentang');
+        Route::post('/update/visimisi', [ProfileController::class, 'updateVisiMisi'])->name('update.visimisi');
+        Route::post('/update/lokasi', [ProfileController::class, 'updateLokasi'])->name('update.lokasi');
+        Route::post('/update/fasilitas', [ProfileController::class, 'updateFasilitas'])->name('update.fasilitas');
+        Route::post('/update/kontak', [ProfileController::class, 'updateKontak'])->name('update.kontak');
+
+    });
+
+
 
     // PENGURUS
     Route::resource('pengurus', PengurusController::class);
