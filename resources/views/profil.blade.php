@@ -99,9 +99,9 @@
                             <div class="misi-content">
                                 <p class="text-muted mb-0">
                                     {!! nl2br(e($profile->misi ?? '1. Menyelenggarakan kegiatan keagamaan yang berkualitas
-                2. Membina generasi muda melalui pendidikan Islam
-                3. Menjadi pusat kegiatan sosial kemasyarakatan
-                4. Mengoptimalkan fungsi masjid sebagai rumah Allah')) !!}
+                        2. Membina generasi muda melalui pendidikan Islam
+                        3. Menjadi pusat kegiatan sosial kemasyarakatan
+                        4. Mengoptimalkan fungsi masjid sebagai rumah Allah')) !!}
                                 </p>
                             </div>
                         </div>
@@ -264,15 +264,25 @@
 
             <div class="row g-4">
                 @php
-                    $facilities = $profile->facilities ?? [
-                        ['name' => 'Ruang Shalat', 'icon' => 'bi-building', 'description' => 'Ruang shalat utama yang luas dan nyaman dengan kapasitas ' . ($profile->capacity ?? '780') . ' jamaah'],
-                        ['name' => 'Tempat Wudhu', 'icon' => 'bi-droplet', 'description' => 'Fasilitas tempat wudhu yang bersih dan memadai untuk jamaah'],
-                        ['name' => 'Toilet', 'icon' => 'bi-door-open', 'description' => 'Toilet bersih dan terawat untuk kenyamanan jamaah'],
-                        ['name' => 'Ruang Serbaguna', 'icon' => 'bi-grid-3x3', 'description' => 'Ruangan untuk kajian, diskusi, dan kegiatan keislaman'],
-                        ['name' => 'Ruang DKM', 'icon' => 'bi-people', 'description' => 'Ruang khusus untuk pengurus DKM dalam mengelola masjid'],
-                        ['name' => 'Area Parkir', 'icon' => 'bi-car-front', 'description' => 'Area parkir yang luas dan aman untuk kendaraan jamaah']
-                    ];
+                    // Decode JSON
+                    if (is_string($profile->facilities)) {
+                        $facilities = json_decode($profile->facilities, true);
+                    } else {
+                        $facilities = $profile->facilities;
+                    }
+
+                    if (!is_array($facilities)) {
+                        $facilities = [
+                            ['name' => 'Ruang Shalat', 'icon' => 'bi-building', 'description' => 'Ruang shalat utama yang luas dan nyaman dengan kapasitas ' . ($profile->capacity ?? '780') . ' jamaah'],
+                            ['name' => 'Tempat Wudhu', 'icon' => 'bi-droplet', 'description' => 'Fasilitas tempat wudhu yang bersih dan memadai untuk jamaah'],
+                            ['name' => 'Toilet', 'icon' => 'bi-door-open', 'description' => 'Toilet bersih dan terawat untuk kenyamanan jamaah'],
+                            ['name' => 'Ruang Serbaguna', 'icon' => 'bi-grid-3x3', 'description' => 'Ruangan untuk kajian, diskusi, dan kegiatan keislaman'],
+                            ['name' => 'Ruang DKM', 'icon' => 'bi-people', 'description' => 'Ruang khusus untuk pengurus DKM dalam mengelola masjid'],
+                            ['name' => 'Area Parkir', 'icon' => 'bi-car-front', 'description' => 'Area parkir yang luas dan aman untuk kendaraan jamaah']
+                        ];
+                    }
                 @endphp
+
 
                 @foreach($facilities as $facility)
                     <div class="col-md-4">

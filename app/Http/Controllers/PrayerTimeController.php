@@ -19,11 +19,14 @@ class PrayerTimeController extends Controller
             $prayerTime = (object) $manual;
         } else {
             // Ambil otomatis dari API
-            $response = Http::get('https://api.aladhan.com/v1/timingsByCity', [
+         $response = Http::withHeaders([
+            'Accept-Encoding' => 'gzip, deflate',])->get("https://api.aladhan.com/v1/timingsByCity/11-12-2025", [
                 'city' => 'Jakarta',
                 'country' => 'Indonesia',
-                'method' => 2
+                'method' => 2,
             ]);
+
+
 
             if ($response->failed()) {
                 return view('jadwal', ['prayerTime' => null]);

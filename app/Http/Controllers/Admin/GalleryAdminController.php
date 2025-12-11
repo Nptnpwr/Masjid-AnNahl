@@ -31,26 +31,36 @@ class GalleryAdminController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
+        $request->validate([
+            'title' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:4096',
+            'video' => 'nullable|mimes:mp4,mov,avi,wmv|max:204800'
         ]);
 
-        // Simpan gambar ke storage
-        $path = $request->file('image')->store('galleries', 'public');
+        $gallery = new Gallery();
 
-        // Simpan ke database
-        Gallery::create([
-            'title' => $validated['title'],
-            'image' => $path,
-        ]);
+        // Upload gambar
+        if ($request->hasFile('image')) {
+            $gallery->image = $request->file('image')->store('galleries', 'public');
+        }
 
-        return redirect()->route('admin.galleries.index')
-            ->with('success', 'Galeri berhasil ditambahkan!');
+        // Upload video
+        if ($request->hasFile('video')) {
+             $videoName = time() . '.' . $request->video->extension();
+            $gallery->video = $request->file('video')->store('videos', 'public');
+
+            $gallery->video = $videoName;
+
+        }
+
+        $gallery->title = $request->title ?? null;
+        $gallery->save();
+
+        return back()->with('success', 'Gallery berhasil ditambahkan!');
     }
 
     /**
-     * Tampilkan form edit galeri
+     * Form edit
      */
     public function edit(Gallery $gallery)
     {
@@ -58,49 +68,57 @@ class GalleryAdminController extends Controller
     }
 
     /**
-     * Update data galeri
+     * Update data galeri (gambar + video)
      */
     public function update(Request $request, Gallery $gallery)
     {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        $request->validate([
+            'title' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:4096',
+            'video' => 'nullable|mimes:mp4,mov,avi,webm|max:500000',
         ]);
 
-        $path = $gallery->image; // Default: gunakan gambar lama
-
-        // Jika ada gambar baru diupload
+        // === UPDATE GAMBAR ===
         if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
             if ($gallery->image && Storage::disk('public')->exists($gallery->image)) {
                 Storage::disk('public')->delete($gallery->image);
             }
 
-            // Simpan gambar baru
-            $path = $request->file('image')->store('galleries', 'public');
+            $gallery->image = $request->file('image')->store('galleries', 'public');
         }
 
-        // Update data galeri
-        $gallery->update([
-            'title' => $validated['title'],
-            'image' => $path,
-        ]);
+        // === UPDATE VIDEO ===
+        if ($request->hasFile('video')) {
+            if ($gallery->video && Storage::disk('public')->exists($gallery->video)) {
+                Storage::disk('public')->delete($gallery->video);
+            }
+
+            $gallery->video = $request->file('video')->store('videos', 'public');
+        }
+
+        $gallery->title = $request->title ?? $gallery->title;
+        $gallery->save();
 
         return redirect()->route('admin.galleries.index')
             ->with('success', 'Galeri berhasil diperbarui!');
     }
 
     /**
-     * Hapus galeri
+     * Hapus galeri (gambar + video)
      */
     public function destroy(Gallery $gallery)
     {
-        // Hapus gambar dari storage
+        // Hapus gambar
         if ($gallery->image && Storage::disk('public')->exists($gallery->image)) {
             Storage::disk('public')->delete($gallery->image);
         }
 
-        // Hapus data dari database
+        // Hapus video
+        if ($gallery->video && Storage::disk('public')->exists($gallery->video)) {
+            Storage::disk('public')->delete($gallery->video);
+        }
+
+        // Hapus row database
         $gallery->delete();
 
         return redirect()->route('admin.galleries.index')
