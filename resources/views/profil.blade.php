@@ -264,12 +264,12 @@
 
             <div class="row g-4">
                 @php
+                    $facilities_raw = $profile->facilities ?? '[]';
+
                     // Decode JSON
-                    if (is_string($profile->facilities)) {
-                        $facilities = json_decode($profile->facilities, true);
-                    } else {
-                        $facilities = $profile->facilities;
-                    }
+                    $facilities = is_string($facilities_raw)
+                        ? json_decode($facilities_raw, true)
+                        : ($facilities_raw ?? []);
 
                     if (!is_array($facilities)) {
                         $facilities = [
