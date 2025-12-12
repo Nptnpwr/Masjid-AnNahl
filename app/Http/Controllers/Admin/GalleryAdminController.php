@@ -67,18 +67,34 @@ class GalleryAdminController extends Controller
 
     $data = ['title' => $request->title];
 
+    // Jika upload image baru
     if ($request->hasFile('image')) {
+        // Hapus image lama jika ada
         if ($gallery->image) {
             Storage::disk('public')->delete($gallery->image);
         }
-        $data['image'] = $request->file('image')->store('galleries/images', 'public');
-    }
-
-    if ($request->hasFile('video')) {
+        // Hapus video lama jika ada (karena diganti dengan image)
         if ($gallery->video) {
             Storage::disk('public')->delete($gallery->video);
         }
+        
+        $data['image'] = $request->file('image')->store('galleries/images', 'public');
+        $data['video'] = null; // Set video jadi null
+    }
+
+    // Jika upload video baru
+    if ($request->hasFile('video')) {
+        // Hapus video lama jika ada
+        if ($gallery->video) {
+            Storage::disk('public')->delete($gallery->video);
+        }
+        // Hapus image lama jika ada (karena diganti dengan video)
+        if ($gallery->image) {
+            Storage::disk('public')->delete($gallery->image);
+        }
+        
         $data['video'] = $request->file('video')->store('galleries/videos', 'public');
+        $data['image'] = null; // Set image jadi null
     }
 
     $gallery->update($data);
