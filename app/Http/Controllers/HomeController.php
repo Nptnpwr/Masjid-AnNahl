@@ -27,9 +27,9 @@ class HomeController extends Controller
     public function profil()
     {
         $profile = MasjidProfile::first();
-        $pengurus = \App\Models\Pengurus::orderBy('urutan', 'asc')->get(); // TAMBAH BARIS INI
+        $pengurus = \App\Models\Pengurus::orderBy('urutan', 'asc')->get(); 
 
-        return view('profil', compact('profile', 'pengurus')); // UPDATE INI
+        return view('profil', compact('profile', 'pengurus'));
     }
 
     // Jadwal Sholat page
