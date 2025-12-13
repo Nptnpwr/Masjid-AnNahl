@@ -104,7 +104,7 @@
             <div class="col-lg-5 d-none d-lg-block">
                 <div class="login-left">
                     <div class="logo-circle">
-                        <img src="https://kompaspedia.kompas.id/wp-content/uploads/2021/07/Logo-Universitas-Sultan-Ageng-Tirtayasa_thumb.png" alt="Logo">
+                        <img src="https://i.ibb.co/3mzvYQXH/Desain-tanpa-judul-removebg-preview.png" alt="Logo">
                     </div>
                     <h2 class="fw-bold mb-3">Selamat Datang!</h2>
                     <p class="mb-4">Silakan login untuk mengakses dashboard admin Masjid An Nahl</p>
@@ -125,7 +125,7 @@
             <div class="col-lg-7">
                 <div class="login-right">
                     <div class="text-center mb-4 d-lg-none">
-                        <img src="https://kompaspedia.kompas.id/wp-content/uploads/2021/07/Logo-Universitas-Sultan-Ageng-Tirtayasa_thumb.png" 
+                        <img src="https://i.ibb.co/3mzvYQXH/Desain-tanpa-judul-removebg-preview.png" 
                              alt="Logo" 
                              style="width: 60px; height: 60px; border-radius: 50%;">
                     </div>

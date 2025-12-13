@@ -324,7 +324,7 @@
                                     <strong>Masjid An Nahl</strong>
                                 </p>
                                 <p class="text-muted mb-3">
-                                    {!! nl2br(e($profile->address ?? 'Jl. Jenderal Sudirman KM 3, Kotabumi, Kec. Purwakarta, Kota Cilegon, Banten 42435, Indonesia')) !!}
+                                    {!! nl2br(e($profile->address ?? 'Jl. Yasmin, Kotabumi, Kec. Purwakarta, Kota Cilegon, Banten 42434')) !!}
                                 </p>
 
                                 <p class="mb-2">

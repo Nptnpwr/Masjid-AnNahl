@@ -19,9 +19,12 @@
         @endphp
 
         @php
-            $facilities = is_string($profile->facilities)
-                ? json_decode($profile->facilities, true)
-                : $profile->facilities;
+              $facilities_raw = $profile->facilities ?? '[]';
+
+                    // Decode JSON
+                    $facilities = is_string($facilities_raw)
+                        ? json_decode($facilities_raw, true)
+                        : ($facilities_raw ?? []);
 
             $facilities = $facilities ?: []; // fallback empty array
         @endphp

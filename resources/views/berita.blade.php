@@ -33,7 +33,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <div class="mb-2">
                                         <small class="text-muted">
-                                            <i class="bi bi-calendar3"></i><i class="bi bi-calendar3"></i>
+                                            <i class="bi bi-calendar3"></i>
                                             {{ $item->published_date->format('d F Y') }}
                                         </small>
                                     </div>

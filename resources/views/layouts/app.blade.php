@@ -170,7 +170,7 @@
     <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{{ route('home') }}">
-                <img src="https://kompaspedia.kompas.id/wp-content/uploads/2021/07/Logo-Universitas-Sultan-Ageng-Tirtayasa_thumb.png" 
+                <img src="https://i.ibb.co/3mzvYQXH/Desain-tanpa-judul-removebg-preview.pngg" 
                      alt="Logo" width="65" height="40" class="rounded-circle me-2">
                 <span class="fw-bold">Masjid An Nahl</span>
             </a>
@@ -232,11 +232,11 @@
             <div class="row g-4">
                 <div class="col-lg-4">
                     <div class="d-flex align-items-center mb-3">
-                        <img src="https://kompaspedia.kompas.id/wp-content/uploads/2021/07/Logo-Universitas-Sultan-Ageng-Tirtayasa_thumb.png" 
+                        <img src="https://i.ibb.co/3mzvYQXH/Desain-tanpa-judul-removebg-preview.png" 
                              alt="Logo" width="65" height="40" class="rounded-circle me-2">
                         <h5 class="text-white mb-0">Masjid An Nahl</h5>
                     </div>
-                    <p class="mb-3">Jl. Jenderal Sudirman KM 3, Kotabumi, Kec. Purwakarta, Kota Cilegon, Banten, 42435, Indonesia</p>
+                    <p class="mb-3">Jl. Yasmin, Kotabumi, Kec. Purwakarta, Kota Cilegon, Banten 42434</p>
                 </div>
                 
                 <div class="col-lg-2 col-md-4">
