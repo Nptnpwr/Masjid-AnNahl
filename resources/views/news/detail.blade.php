@@ -10,10 +10,10 @@
     </p>
 
     @if ($newsItem->image)
-        <img src="{{ asset('storage/' . $newsItem->image) }}" alt="{{ $newsItem->title }}" class="img-fluid mb-4 rounded">
+        <img src="{{ asset('storage/' . $newsItem->image) }}" alt="{!! $newsItem->title !!}" class="img-fluid mb-4 rounded">
     @endif
 
-    <p>{{ $newsItem->content }}</p>
+    <p>{!! $newsItem->content !!}</p>
 
     <hr>
     <h4 class="mt-5">Berita Lainnya</h4>

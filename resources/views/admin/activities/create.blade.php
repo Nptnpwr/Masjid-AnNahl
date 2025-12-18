@@ -105,7 +105,7 @@
         if (descTextarea) {
             descTextarea.removeAttribute('required');
         }
-        
+
         // Validasi manual
         const form = document.querySelector('form');
         if (form) {
