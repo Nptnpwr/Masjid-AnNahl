@@ -14,7 +14,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('admin.activities.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.activities.store') }}" method="POST" enctype="multipart/form-data" novalidate>
                 @csrf
 
                 <div class="mb-3">
@@ -29,8 +29,8 @@
                 <div class="mb-3">
                     <label for="description" class="form-label">Deskripsi <span class="text-danger">*</span></label>
                     <textarea class="form-control @error('description') is-invalid @enderror" id="description"
-                        name="description" rows="4" placeholder="Jelaskan detail kegiatan..."
-                        required>{!! old('description') !!}</textarea>
+                        name="description" rows="4" placeholder="Jelaskan detail kegiatan...">{!! old('description') !!}</textarea>
+                    <!-- HAPUS: required -->
                     @error('description')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -72,7 +72,8 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="col-md-6 mb-3">
+
+                <div class="mb-3">
                     <label for="image" class="form-label">Gambar</label>
                     <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image"
                         accept="image/*">
@@ -95,4 +96,30 @@
             </form>
         </div>
     </div>
+
+    @push('scripts')
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Remove required attribute dari TinyMCE textarea
+        const descTextarea = document.getElementById('description');
+        if (descTextarea) {
+            descTextarea.removeAttribute('required');
+        }
+        
+        // Validasi manual
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const editor = tinymce.get('description');
+                if (!editor || editor.getContent().trim() === '') {
+                    e.preventDefault();
+                    alert('Deskripsi harus diisi!');
+                    if (editor) editor.focus();
+                    return false;
+                }
+            });
+        }
+    });
+    </script>
+    @endpush
 @endsection

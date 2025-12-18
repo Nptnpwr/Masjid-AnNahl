@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('date');
+            $table->date('date');
             $table->string('place');
             $table->enum('type', ['rutin', 'insidental'])->default('rutin');
             $table->string('image')->nullable();

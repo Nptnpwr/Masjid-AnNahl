@@ -2,8 +2,9 @@
 
 @section('title', 'Edit Berita')
 
-@section('tinymce', '#content')
-@section('content')
+@section('tinymce', '#content')  <!-- SEBELUM @section('content') -->
+
+@section('content')  <!-- DIMULAI SETELAH TINYMCE -->
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="mb-0">Edit Berita</h2>
     <a href="{{ route('admin.news.index') }}" class="btn btn-secondary">
@@ -13,7 +14,7 @@
 
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('admin.news.update', $news->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.news.update', $news->id) }}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
             @method('PUT')
 
@@ -50,8 +51,8 @@
                           id="content"
                           name="content"
                           rows="8"
-                          placeholder="Tulis isi berita lengkap..."
-                          required>{{ old('content', $news->content) }}</textarea>
+                          placeholder="Tulis isi berita lengkap...">{{ old('content', $news->content) }}</textarea>
+                <!-- HAPUS: required -->
                 @error('content')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -64,7 +65,7 @@
                         <input type="date"
                                class="form-control @error('date') is-invalid @enderror"
                                id="date"
-                               name="date"
+                               name="published_date"
                                value="{{ old('date', \Carbon\Carbon::parse($news->date)->format('Y-m-d')) }}"
                                required>
                         @error('date')
@@ -113,4 +114,31 @@
         </form>
     </div>
 </div>
+
+{{-- TAMBAH VALIDASI JAVASCRIPT --}}
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Force remove required attribute dari textarea content
+    const contentTextarea = document.getElementById('content');
+    if (contentTextarea) {
+        contentTextarea.removeAttribute('required');
+    }
+    
+    // Validasi manual sebelum submit
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            const editor = tinymce.get('content');
+            if (!editor || editor.getContent().trim() === '') {
+                e.preventDefault();
+                alert('Isi berita harus diisi!');
+                if (editor) editor.focus();
+                return false;
+            }
+        });
+    }
+});
+</script>
+@endpush
 @endsection

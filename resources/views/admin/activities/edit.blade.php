@@ -14,7 +14,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('admin.activities.update', $activity->id) }}" method="POST">
+            <form action="{{ route('admin.activities.update', $activity->id) }}" method="POST" enctype="multipart/form-data" novalidate>
                 @csrf
                 @method('PUT')
 
@@ -30,8 +30,8 @@
                 <div class="mb-3">
                     <label for="description" class="form-label">Deskripsi <span class="text-danger">*</span></label>
                     <textarea class="form-control @error('description') is-invalid @enderror" id="description"
-                        name="description" rows="4" placeholder="Jelaskan detail kegiatan..."
-                        required>{{ old('description', $activity->description) }}</textarea>
+                        name="description" rows="4" placeholder="Jelaskan detail kegiatan...">{{ old('description', $activity->description) }}</textarea>
+                    <!-- HAPUS: required -->
                     @error('description')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -76,6 +76,30 @@
                     @enderror
                 </div>
 
+                <div class="mb-3">
+                    <label for="image" class="form-label">Gambar</label>
+
+                    @if($activity->image)
+                        <div class="mb-2">
+                            <img src="{{ Storage::url($activity->image) }}"
+                                 alt="Current Image"
+                                 class="img-thumbnail"
+                                 style="max-width: 200px;">
+                            <p class="small text-muted mt-1">Gambar saat ini</p>
+                        </div>
+                    @endif
+
+                    <input type="file"
+                           class="form-control @error('image') is-invalid @enderror"
+                           id="image"
+                           name="image"
+                           accept="image/*">
+                    @error('image')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                    <small class="text-muted">Biarkan kosong jika tidak ingin mengubah gambar</small>
+                </div>
+
                 <hr>
 
                 <div class="d-flex justify-content-end gap-2">
@@ -89,4 +113,30 @@
             </form>
         </div>
     </div>
+
+    @push('scripts')
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Remove required attribute
+        const descTextarea = document.getElementById('description');
+        if (descTextarea) {
+            descTextarea.removeAttribute('required');
+        }
+        
+        // Validasi manual
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                const editor = tinymce.get('description');
+                if (!editor || editor.getContent().trim() === '') {
+                    e.preventDefault();
+                    alert('Deskripsi harus diisi!');
+                    if (editor) editor.focus();
+                    return false;
+                }
+            });
+        }
+    });
+    </script>
+    @endpush
 @endsection
