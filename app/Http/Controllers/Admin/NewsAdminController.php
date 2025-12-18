@@ -25,28 +25,27 @@ class NewsAdminController extends Controller
     }
 
     // Store new news
-public function store(Request $request)
-{
-    $validated = $request->validate([
-        'title' => 'required|string|max:255',
-        'excerpt' => 'required|string',
-        'content' => 'required|string',
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'excerpt' => 'required|string|max:200',
+            'content' => 'required|string',
+            'published_date' => 'required|date',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+        ]);
 
-    ]);
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('news_images', 'public');
+        }
 
-    // Handle image upload
-    if ($request->hasFile('image')) {
-        $validated['image'] = $request->file('image')->store('news_images', 'public');
+        // $validated['published_date'] = now();
+
+        News::create($validated);
+
+        return redirect()->route('admin.news.index')->with('success', 'Berita berhasil ditambahkan.');
     }
-
-    // Tambahkan published_date otomatis
-    $validated['published_date'] = now();
-
-    // Simpan ke database
-    \App\Models\News::create($validated);
-
-    return redirect()->route('admin.news.index')->with('success', 'Berita berhasil ditambahkan.');
-}
 
     // Show edit form
     public function edit(News $news)
@@ -58,20 +57,15 @@ public function store(Request $request)
     public function update(Request $request, News $news)
     {
         $validated = $request->validate([
-        'title' => 'required',
-        'excerpt' => 'required',
-        'content' => 'required',
-        'published_date' => [
-            'required',
-            'date',
-            Rule::unique('news', 'published_date')->ignore($news->id),
-        ],
-        'image' => 'nullable|image',
-]);
+            'title' => 'required|string|max:255',
+            'excerpt' => 'required|string|max:200',
+            'content' => 'required|string',
+            'published_date' => 'required|date',
+            'image' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+        ]);
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete old image if exists
             if ($news->image) {
                 Storage::disk('public')->delete($news->image);
             }
@@ -80,8 +74,7 @@ public function store(Request $request)
 
         $news->update($validated);
 
-        return redirect()->route('admin.news.index')
-            ->with('success', 'Berita berhasil diupdate!');
+        return redirect()->route('admin.news.index')->with('success', 'Berita berhasil diupdate!');
     }
 
     // Delete news
