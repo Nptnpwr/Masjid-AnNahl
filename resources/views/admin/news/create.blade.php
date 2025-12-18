@@ -2,6 +2,8 @@
 
 @section('title', 'Tambah Berita')
 
+@section('tinymce', '#content')  <!-- Tetap di sini -->
+
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="mb-0">Tambah Berita</h2>
@@ -10,11 +12,9 @@
     </a>
 </div>
 
-@section('tinymce', '#content')
-
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
 
             <div class="mb-3">
@@ -51,8 +51,8 @@
                           id="content"
                           name="content"
                           rows="8"
-                          placeholder="Tulis isi berita lengkap..."
-                          required>{{ old('content') }}</textarea>
+                          placeholder="Tulis isi berita lengkap...">{{ old('content') }}</textarea>
+                <!-- HAPUS: required -->
                 @error('content')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -65,7 +65,7 @@
                         <input type="date"
                                class="form-control @error('date') is-invalid @enderror"
                                id="date"
-                               name="date"
+                               name="published_date"
                                value="{{ old('date', date('Y-m-d')) }}"
                                required>
                         @error('date')
@@ -103,4 +103,17 @@
         </form>
     </div>
 </div>
+
+{{-- JIKA PERLU VALIDASI JAVASCRIPT --}}
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Remove required attribute (safety)
+    const contentTextarea = document.getElementById('content');
+    if (contentTextarea) {
+        contentTextarea.removeAttribute('required');
+    }
+});
+</script>
+@endpush
 @endsection
