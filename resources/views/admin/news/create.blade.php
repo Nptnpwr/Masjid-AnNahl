@@ -27,7 +27,7 @@
                        placeholder="Contoh: Peringatan Maulid Nabi Muhammad SAW"
                        required>
                 @error('title')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                    <div class="invalid-feedback">{!! $message !!}</div>
                 @enderror
             </div>
 

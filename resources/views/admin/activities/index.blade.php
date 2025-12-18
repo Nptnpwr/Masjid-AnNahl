@@ -32,7 +32,7 @@
                                 <td>
                                     <strong>{{ $activity->title }}</strong>
                                     <br>
-                                    <small class="text-muted">{{ Str::limit($activity->description, 50) }}</small>
+                                    <small class="text-muted">{!! Str::limit($activity->description, 50) !!}</small>
                                 </td>
                                 <td>
                                     <i class="bi bi-calendar3 text-primary"></i>
@@ -49,19 +49,19 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group" role="group">
-                                        <a href="{{ route('admin.activities.edit', $activity->id) }}" 
-                                           class="btn btn-sm btn-warning" 
+                                        <a href="{{ route('admin.activities.edit', $activity->id) }}"
+                                           class="btn btn-sm btn-warning"
                                            title="Edit">
                                             <i class="bi bi-pencil"></i>
                                         </a>
-                                        <form action="{{ route('admin.activities.destroy', $activity->id) }}" 
-                                              method="POST" 
+                                        <form action="{{ route('admin.activities.destroy', $activity->id) }}"
+                                              method="POST"
                                               class="d-inline"
                                               onsubmit="return confirm('Yakin ingin menghapus kegiatan ini?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" 
-                                                    class="btn btn-sm btn-danger" 
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-danger"
                                                     title="Hapus">
                                                 <i class="bi bi-trash"></i>
                                             </button>
