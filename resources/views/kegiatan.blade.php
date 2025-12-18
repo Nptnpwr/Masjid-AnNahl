@@ -29,7 +29,7 @@
                                         </span>
                                     </div>
 
-                                    <p class="card-text text-muted">{{ $activity->description }}</p>
+                                    <p class="card-text text-muted">{!! $activity->description !!}</p>
 
                                     <div class="mt-4">
                                         <div class="d-flex align-items-center mb-2">

@@ -10,17 +10,19 @@
     </a>
 </div>
 
+@section('tinymce', '#content')
+
 <div class="card">
     <div class="card-body">
         <form action="{{ route('admin.news.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            
+
             <div class="mb-3">
                 <label for="title" class="form-label">Judul Berita <span class="text-danger">*</span></label>
-                <input type="text" 
-                       class="form-control @error('title') is-invalid @enderror" 
-                       id="title" 
-                       name="title" 
+                <input type="text"
+                       class="form-control @error('title') is-invalid @enderror"
+                       id="title"
+                       name="title"
                        value="{{ old('title') }}"
                        placeholder="Contoh: Peringatan Maulid Nabi Muhammad SAW"
                        required>
@@ -31,9 +33,9 @@
 
             <div class="mb-3">
                 <label for="excerpt" class="form-label">Ringkasan <span class="text-danger">*</span></label>
-                <textarea class="form-control @error('excerpt') is-invalid @enderror" 
-                          id="excerpt" 
-                          name="excerpt" 
+                <textarea class="form-control @error('excerpt') is-invalid @enderror"
+                          id="excerpt"
+                          name="excerpt"
                           rows="3"
                           placeholder="Tulis ringkasan singkat berita..."
                           required>{{ old('excerpt') }}</textarea>
@@ -45,9 +47,9 @@
 
             <div class="mb-3">
                 <label for="content" class="form-label">Isi Berita <span class="text-danger">*</span></label>
-                <textarea class="form-control @error('content') is-invalid @enderror" 
-                          id="content" 
-                          name="content" 
+                <textarea class="form-control @error('content') is-invalid @enderror"
+                          id="content"
+                          name="content"
                           rows="8"
                           placeholder="Tulis isi berita lengkap..."
                           required>{{ old('content') }}</textarea>
@@ -60,10 +62,10 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="date" class="form-label">Tanggal Berita <span class="text-danger">*</span></label>
-                        <input type="date" 
-                               class="form-control @error('date') is-invalid @enderror" 
-                               id="date" 
-                               name="date" 
+                        <input type="date"
+                               class="form-control @error('date') is-invalid @enderror"
+                               id="date"
+                               name="date"
                                value="{{ old('date', date('Y-m-d')) }}"
                                required>
                         @error('date')
@@ -75,9 +77,9 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="image" class="form-label">Gambar Berita</label>
-                        <input type="file" 
-                               class="form-control @error('image') is-invalid @enderror" 
-                               id="image" 
+                        <input type="file"
+                               class="form-control @error('image') is-invalid @enderror"
+                               id="image"
                                name="image"
                                accept="image/*">
                         @error('image')

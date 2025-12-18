@@ -2,6 +2,8 @@
 
 @section('title', 'Tambah Kegiatan')
 
+@section('tinymce', '#description')
+
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="mb-0">Tambah Kegiatan</h2>
@@ -28,7 +30,7 @@
                     <label for="description" class="form-label">Deskripsi <span class="text-danger">*</span></label>
                     <textarea class="form-control @error('description') is-invalid @enderror" id="description"
                         name="description" rows="4" placeholder="Jelaskan detail kegiatan..."
-                        required>{{ old('description') }}</textarea>
+                        required>{!! old('description') !!}</textarea>
                     @error('description')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

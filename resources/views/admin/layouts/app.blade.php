@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin Dashboard') - Masjid An Nahl</title>
-    
+
     <title>@yield('title', 'Admin Dashboard') - Masjid An Nahl</title>
 
     <!-- Bootstrap CSS -->
@@ -274,6 +274,37 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     @stack('scripts')
+
+    {{-- TinyMCE (only if page requests it) --}}
+    @if(View::hasSection('tinymce'))
+        <script src="https://cdn.tiny.cloud/1/ihy5gb0y6xbejyhaj9d2vtqq1nsgv5to200b73hc8g05cabe/tinymce/6/tinymce.min.js"
+                referrerpolicy="origin"></script>
+
+        <script>
+            tinymce.init({
+                selector: "@yield('tinymce')",
+                height: 400,
+                menubar: false,
+                plugins: 'lists link image table code',
+                toolbar:
+                    'undo redo | formatselect | bold italic | ' +
+                    'bullist numlist | link | code'
+            });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const forms = document.querySelectorAll('form');
+
+                forms.forEach(function (form) {
+                    form.addEventListener('submit', function () {
+                        if (typeof tinymce !== 'undefined') {
+                            tinymce.triggerSave();
+                        }
+                    });
+                });
+            });
+        </script>
+    @endif
+
 </body>
 
 </html>

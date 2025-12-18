@@ -31,7 +31,7 @@ public function store(Request $request)
         'title' => 'required|string|max:255',
         'excerpt' => 'required|string',
         'content' => 'required|string',
-            
+
     ]);
 
     // Handle image upload

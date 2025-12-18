@@ -95,7 +95,7 @@
                                         {{ ucfirst($activity->type) }}
                                     </span>
                                 </div>
-                                <p class="card-text text-muted">{{ Str::limit($activity->description, 100) }}</p>
+                                <p class="card-text text-muted">{!! Str::limit($activity->description, 100) !!}</p>
                                 <div class="mt-3">
                                     <small class="text-muted d-block">
                                         <i class="bi bi-calendar"></i> {{ $activity->date }}
@@ -185,16 +185,16 @@
                 @php
                     $media = $gallery->image ?? $gallery->video;
                     $ext = strtolower(pathinfo($media, PATHINFO_EXTENSION));
-                    
+
                     $isImage = in_array($ext, ['jpg','jpeg','png','gif','webp']);
                     $isVideo = in_array($ext, ['mp4','mov','avi','mkv','webm']);
-                    
+
                     // Fix untuk path yang tidak lengkap
                     $videoPath = $gallery->video;
                     if ($videoPath && !str_contains($videoPath, '/')) {
                         $videoPath = 'galleries/videos/' . $videoPath;
                     }
-                    
+
                     $imagePath = $gallery->image;
                     if ($imagePath && !str_contains($imagePath, '/')) {
                         $imagePath = 'galleries/images/' . $imagePath;
@@ -205,21 +205,21 @@
                     <div class="card card-custom h-100 gallery-card-landing">
                         <div class="position-relative" style="height: 200px; overflow: hidden; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#modalGallery{{ $gallery->id }}">
                             @if ($isImage && $gallery->image)
-                                <img 
-                                    src="{{ Storage::url($imagePath) }}" 
+                                <img
+                                    src="{{ Storage::url($imagePath) }}"
                                     class="w-100 h-100 gallery-img-landing"
                                     alt="{{ $gallery->title }}"
                                     style="object-fit: cover;"
                                     onerror="this.parentElement.innerHTML='<div class=\'d-flex justify-content-center align-items-center w-100 h-100 bg-light\'><i class=\'bi bi-image-fill text-muted\' style=\'font-size: 3rem;\'></i></div>'"
                                 >
-                                
+
                                 {{-- Zoom overlay untuk gambar --}}
                                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center gallery-overlay-landing">
                                     <i class="bi bi-zoom-in text-white" style="font-size: 2.5rem;"></i>
                                 </div>
-                            
+
                             @elseif ($isVideo && $gallery->video)
-                                <video 
+                                <video
                                     preload="metadata"
                                     class="w-100 h-100"
                                     style="object-fit: cover; background: #000;"
@@ -227,19 +227,19 @@
                                 >
                                     <source src="{{ Storage::url($videoPath) }}" type="video/mp4">
                                 </video>
-                                
+
                                 {{-- Play button overlay --}}
                                 <div class="position-absolute top-50 start-50 translate-middle" style="pointer-events: none;">
                                     <i class="bi bi-play-circle-fill text-white" style="font-size: 3.5rem; opacity: 0.9; text-shadow: 0 2px 8px rgba(0,0,0,0.5);"></i>
                                 </div>
-                            
+
                             @else
                                 <div class="d-flex justify-content-center align-items-center w-100 h-100 bg-light">
                                     <i class="bi bi-image text-muted" style="font-size: 3rem;"></i>
                                 </div>
                             @endif
                         </div>
-                        
+
                         <div class="card-body">
                             <h5 class="card-title mb-2" style="font-size: 0.95rem;">{{ $gallery->title }}</h5>
                             <div class="d-flex justify-content-between align-items-center mt-3">
@@ -247,7 +247,7 @@
                                     <i class="bi bi-calendar3"></i>
                                     {{ $gallery->created_at->format('d M Y') }}
                                 </small>
-                                
+
                                 @if($isVideo)
                                     <span class="badge bg-primary">
                                         <i class="bi bi-camera-video"></i> Video
@@ -272,14 +272,14 @@
                             </div>
                             <div class="modal-body p-0">
                                 @if ($isImage && $gallery->image)
-                                    <img 
-                                        src="{{ Storage::url($imagePath) }}" 
+                                    <img
+                                        src="{{ Storage::url($imagePath) }}"
                                         alt="{{ $gallery->title }}"
                                         class="w-100"
                                         style="object-fit: contain; max-height: 80vh;"
                                     >
                                 @elseif ($isVideo && $gallery->video)
-                                    <video 
+                                    <video
                                         controls
                                         class="w-100"
                                         style="background: #000; max-height: 80vh;"
